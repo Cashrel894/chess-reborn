@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../../lib/chess/square'
-
 RSpec.describe Chess::Square do
   shared_examples 'right square' do |rank, file|
     it 'returns the right square' do

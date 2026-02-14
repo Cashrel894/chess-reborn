@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../../lib/chess/piece'
-
 RSpec.describe Chess::Piece do
   shared_examples 'right piece' do |type, player|
     it 'returns the right Piece' do
