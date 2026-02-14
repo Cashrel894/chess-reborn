@@ -76,6 +76,8 @@ module Chess
     # Provides private helper methods for Square class.
     #
     module SquareHelpers
+      private
+
       RANK_BASE = '1'
       FILE_BASE = 'a'
 
@@ -124,6 +126,9 @@ module Chess
     end
 
     include SquareHelpers
-    extend SquareHelpers
+
+    class << self
+      include SquareHelpers
+    end
   end
 end
