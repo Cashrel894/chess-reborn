@@ -38,7 +38,7 @@ module Chess
 
       raise ArgumentError unless valid_index?(rank_idx) && valid_index?(file_idx)
 
-      new(rank_idx, file_idx)
+      get_instance(rank_idx, file_idx)
     end
 
     def offset_by(rank_offs, file_offs)
@@ -129,6 +129,15 @@ module Chess
 
     class << self
       include SquareHelpers
+
+      def get_instance(rank_idx, file_idx)
+        @instances ||= {}
+
+        key = [rank_idx, file_idx].freeze
+        return @instances[key] if @instances.include? key
+
+        @instances[key] = new(rank_idx, file_idx)
+      end
     end
   end
 end
