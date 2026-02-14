@@ -41,6 +41,14 @@ module Chess
 
     attr_reader :type, :player
 
+    def ==(other)
+      @type == other.type && @player == other.player
+    end
+
+    def hash
+      [@type, @player].hash
+    end
+
     private
 
     #
