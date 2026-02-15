@@ -28,6 +28,8 @@ module Chess
       file_to_mark(@file_idx)
     end
 
+    attr_reader :rank_idx, :file_idx
+
     def to_s
       file + rank
     end
