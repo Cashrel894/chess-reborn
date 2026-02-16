@@ -19,6 +19,8 @@ module Chess
 
     attr_reader :from, :to, :promotion
 
+    # TODO: move the following pathing methods to rule modules about Rook, Bishop and Queen.
+
     def path
       raise ArgumentError unless aligned?(@from, @to)
 
@@ -31,7 +33,19 @@ module Chess
     def aligned?(from, to)
       horizonally_aligned?(from, to) ||
         vertically_aligned?(from, to) ||
-        diagonally_aligned?(from, to) ||
+        diagonally_aligned?(from, to)
+    end
+
+    def horizonally_aligned?(from, to)
+      from.rank == to.rank
+    end
+
+    def vertically_aligned?(from, to)
+      from.file == to.file
+    end
+
+    def diagonally_aligned?(from, to)
+      forth_diagonally_aligned?(from, to) ||
         back_diagonally_aligned?(from, to)
     end
 
@@ -87,13 +101,6 @@ module Chess
       end
 
       # align verifiers
-      def horizonally_aligned?(from, to)
-        from.rank == to.rank
-      end
-
-      def vertically_aligned?(from, to)
-        from.file == to.file
-      end
 
       def rank_offs(from, to)
         to.rank_idx - from.rank_idx
@@ -103,7 +110,7 @@ module Chess
         to.file_idx - from.file_idx
       end
 
-      def diagonally_aligned?(from, to)
+      def forth_diagonally_aligned?(from, to)
         rank_offs(from, to) == file_offs(from, to)
       end
 
