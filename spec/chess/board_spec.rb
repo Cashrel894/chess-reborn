@@ -45,7 +45,7 @@ RSpec.describe Chess::Board do
     subject(:board) { described_class.default.reset(square) }
 
     context 'with square a Square' do
-      let(:square) { Square.from('f1') }
+      let(:square) { Chess::Square.from('f1') }
 
       include_examples 'right board', 'f1', Chess::Piece.empty
     end
