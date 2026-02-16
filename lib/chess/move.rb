@@ -30,7 +30,7 @@ module Chess
     # TODO: move the following pathing methods to rule modules about Rook, Bishop and Queen.
 
     def path
-      raise ArgumentError unless aligned?(@from, @to)
+      raise ArgumentError unless aligned?
 
       rank_idx_arr = to_idx_arr(@from.rank_idx, @to.rank_idx)
       file_idx_arr = to_idx_arr(@from.file_idx, @to.file_idx)
@@ -38,23 +38,23 @@ module Chess
       path_arr(rank_idx_arr, file_idx_arr).uniq # The #uniq handles the single square case
     end
 
-    def aligned?(from, to)
-      horizonally_aligned?(from, to) ||
-        vertically_aligned?(from, to) ||
-        diagonally_aligned?(from, to)
+    def aligned?
+      horizonally_aligned? ||
+        vertically_aligned? ||
+        diagonally_aligned?
     end
 
-    def horizonally_aligned?(from, to)
+    def horizonally_aligned?
       from.rank == to.rank
     end
 
-    def vertically_aligned?(from, to)
+    def vertically_aligned?
       from.file == to.file
     end
 
-    def diagonally_aligned?(from, to)
-      forth_diagonally_aligned?(from, to) ||
-        back_diagonally_aligned?(from, to)
+    def diagonally_aligned?
+      forth_diagonally_aligned? ||
+        back_diagonally_aligned?
     end
 
     private
@@ -110,12 +110,12 @@ module Chess
 
       # align verifiers
 
-      def forth_diagonally_aligned?(from, to)
-        rank_offs(from, to) == file_offs(from, to)
+      def forth_diagonally_aligned?
+        rank_offs == file_offs
       end
 
-      def back_diagonally_aligned?(from, to)
-        rank_offs(from, to) == -file_offs(from, to)
+      def back_diagonally_aligned?
+        rank_offs == -file_offs
       end
     end
 
