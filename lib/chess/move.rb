@@ -19,6 +19,14 @@ module Chess
 
     attr_reader :from, :to, :promotion
 
+    def rank_offs
+      to.rank_idx - from.rank_idx
+    end
+
+    def file_offs
+      to.file_idx - from.file_idx
+    end
+
     # TODO: move the following pathing methods to rule modules about Rook, Bishop and Queen.
 
     def path
@@ -101,14 +109,6 @@ module Chess
       end
 
       # align verifiers
-
-      def rank_offs(from, to)
-        to.rank_idx - from.rank_idx
-      end
-
-      def file_offs(from, to)
-        to.file_idx - from.file_idx
-      end
 
       def forth_diagonally_aligned?(from, to)
         rank_offs(from, to) == file_offs(from, to)
