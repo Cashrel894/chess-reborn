@@ -40,6 +40,10 @@ module Chess
       get_instance(rank_idx, file_idx)
     end
 
+    class << self
+      alias [] by_idx
+    end
+
     def offset_by(rank_offs, file_offs)
       rank_offs = rank_offs.to_i
       file_offs = file_offs.to_i
