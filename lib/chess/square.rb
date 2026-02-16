@@ -5,13 +5,6 @@ module Chess
   # Represents a single square on a 8*8 Chess board.
   #
   class Square
-    def self.create(rank, file)
-      file = file.downcase
-      raise ArgumentError unless valid_rank?(rank) && valid_file?(file)
-
-      by_index(rank_to_index(rank), file_to_index(file))
-    end
-
     def self.from(obj)
       return obj if obj.is_a? self
 
@@ -21,14 +14,18 @@ module Chess
     end
 
     def rank
-      rank_to_mark(@rank_idx)
+      rank_to_mark(rank_idx)
     end
 
     def file
-      file_to_mark(@file_idx)
+      file_to_mark(file_idx)
     end
 
     attr_reader :rank_idx, :file_idx
+
+    def idx
+      [rank_idx, file_idx]
+    end
 
     def to_s
       file + rank
@@ -47,8 +44,8 @@ module Chess
       rank_offs = rank_offs.to_i
       file_offs = file_offs.to_i
 
-      new_rank_idx = @rank_idx + rank_offs
-      new_file_idx = @file_idx + file_offs
+      new_rank_idx = rank_idx + rank_offs
+      new_file_idx = file_idx + file_offs
 
       return nil unless valid_index?(new_rank_idx) && valid_index?(new_file_idx)
 
@@ -130,6 +127,8 @@ module Chess
     include SquareHelpers
 
     class << self
+      private
+
       include SquareHelpers
 
       def get_instance(rank_idx, file_idx)
@@ -139,6 +138,13 @@ module Chess
         return @instances[key] if @instances.include? key
 
         @instances[key] = new(rank_idx, file_idx)
+      end
+
+      def create(rank, file)
+        file = file.downcase
+        raise ArgumentError unless valid_rank?(rank) && valid_file?(file)
+
+        by_index(rank_to_index(rank), file_to_index(file))
       end
     end
   end
