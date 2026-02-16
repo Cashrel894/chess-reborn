@@ -12,20 +12,13 @@ module Chess
     end
 
     def self.default
-      custom(DEFAULT_SYM_ARR)
+      from_sym_arr(DEFAULT_SYM_ARR)
     end
 
-    def self.custom(sym_arr)
-      raise ArgumentError unless sym_arr.is_a?(Array) && sym_arr.length == 8 * 8
+    def self.from(obj)
+      return obj if obj.is_a?(self)
 
-      pieces = {}
-      sym_arr.each_with_index do |sym, idx|
-        square = Square.by_idx(idx / 8, idx % 8)
-        piece = Piece.from(sym)
-        pieces[square] = piece
-      end
-
-      new(pieces)
+      from_sym_arr(obj)
     end
 
     def set(square, piece)
@@ -88,5 +81,20 @@ module Chess
     def initialize(pieces = nil)
       @pieces = pieces || Hash.new(Piece.empty)
     end
+
+    def self.from_sym_arr(sym_arr)
+      raise ArgumentError unless sym_arr.is_a?(Array) && sym_arr.length == 8 * 8
+
+      pieces = {}
+      sym_arr.each_with_index do |sym, idx|
+        square = Square.by_idx(idx / 8, idx % 8)
+        piece = Piece.from(sym)
+        pieces[square] = piece
+      end
+
+      new(pieces)
+    end
+
+    private_class_method :from_sym_arr
   end
 end

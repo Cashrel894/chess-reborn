@@ -4,7 +4,7 @@ RSpec.describe Chess::Game do
   shared_examples 'right game' do |msg = 'returns the right game'|
     it msg do
       is_expected.to be_a described_class
-      expect(subject.board).to eq(Chess::Board.custom(board)) if board
+      expect(subject.board).to eq(Chess::Board.from(board)) if board
       expect(subject.current_player).to eq(current_player) if current_player
       expect(subject.turn_id).to eq(turn_id) if turn_id
       expect(subject.status).to eq(status) if status

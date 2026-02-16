@@ -57,7 +57,7 @@ RSpec.describe Chess::Board do
     end
   end
 
-  describe '#custom' do
+  describe '#from' do
     let(:sym_arr) do
       %i[
         R N B Q K B N R
@@ -70,7 +70,7 @@ RSpec.describe Chess::Board do
         r n b q k b n r
       ]
     end
-    subject(:board) { described_class.custom(sym_arr) }
+    subject(:board) { described_class.from(sym_arr) }
 
     include_examples 'right board', 'e1', Chess::Piece.from(:K)
     include_examples 'right board', 'b2', Chess::Piece.from(:P)

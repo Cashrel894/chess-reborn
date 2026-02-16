@@ -37,7 +37,7 @@ module Chess
     private
 
     def initialize(board, current_player, turn_id)
-      @board = Board.custom(board)
+      @board = Board.from(board)
       @current_player = current_player
       @turn_id = turn_id
     end
