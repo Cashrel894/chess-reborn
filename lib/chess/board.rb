@@ -61,6 +61,10 @@ module Chess
       end
     end
 
+    def ==(other)
+      to_a == other.to_a
+    end
+
     private
 
     #
