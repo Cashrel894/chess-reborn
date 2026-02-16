@@ -20,7 +20,7 @@ module Chess
 
       pieces = {}
       sym_arr.each_with_index do |sym, idx|
-        square = Square.by_index(idx / 8, idx % 8)
+        square = Square.by_idx(idx / 8, idx % 8)
         piece = Piece.from(sym)
         pieces[square] = piece
       end
@@ -50,11 +50,11 @@ module Chess
     alias [] get
 
     def each
-      single_index = (0..7).to_a
-      double_index = single_index.product(single_index)
+      single_idx = (0..7).to_a
+      double_idx = single_idx.product(single_idx)
 
-      double_index.map do |square_index|
-        square = Square.by_index(*square_index)
+      double_idx.map do |square_idx|
+        square = Square.by_idx(*square_idx)
         yield get(square)
       end
     end

@@ -19,37 +19,6 @@ RSpec.describe Chess::Square do
     end
   end
 
-  describe '.create' do
-    subject(:square) { described_class.create(rank, file) }
-
-    context "with lowercase file & file = 'a' & rank = '1'" do
-      let(:rank) { '1' }
-      let(:file) { 'a' }
-
-      include_examples 'right square', '1', 'a'
-    end
-
-    context "with uppercase file & file = 'h' & rank = '8'" do
-      let(:rank) { '8' }
-      let(:file) { 'H' }
-
-      include_examples 'right square', '8', 'h'
-    end
-
-    context "with file in 'b'..'g' & rank = '2'..'7'" do
-      let(:rank) { '4' }
-      let(:file) { 'e' }
-
-      include_examples 'right square', '4', 'e'
-    end
-
-    context 'with invalid input' do
-      it 'raises ArgumentError' do
-        expect { described_class.create('5', 'i') }.to raise_error ArgumentError
-      end
-    end
-  end
-
   describe '.from' do
     #
     # Testing Strategy:
@@ -99,7 +68,7 @@ RSpec.describe Chess::Square do
     end
   end
 
-  describe '.by_index' do
+  describe '.by_idx' do
     #
     # Testing Strategy:
     #   When rank and file are both integers:
@@ -108,7 +77,7 @@ RSpec.describe Chess::Square do
     #   When rank and file are either non-integer objects that respond to #to_i
     #
 
-    subject(:square) { described_class.by_index(rank_idx, file_idx) }
+    subject(:square) { described_class.by_idx(rank_idx, file_idx) }
 
     context 'when rank_idx and file_idx are both integers' do
       context 'with rank_idx = 0 & file_idx = 0' do
@@ -137,7 +106,7 @@ RSpec.describe Chess::Square do
         let(:file_idx) { 3 }
 
         it 'raises ArgumentError' do
-          expect { described_class.by_index(rank_idx, file_idx) }.to raise_error ArgumentError
+          expect { described_class.by_idx(rank_idx, file_idx) }.to raise_error ArgumentError
         end
       end
     end

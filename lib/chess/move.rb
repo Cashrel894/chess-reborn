@@ -81,7 +81,7 @@ module Chess
         path_idx_arr(rank_idx_arr, file_idx_arr).map do |idx_pair|
           rank_idx = idx_pair[1]
           file_idx = idx_pair[2]
-          Square.by_index(rank_idx, file_idx)
+          Square.by_idx(rank_idx, file_idx)
         end
       end
 
