@@ -47,9 +47,7 @@ module Chess
       @pieces[square]
     end
 
-    def [](square)
-      get(square)
-    end
+    alias [] get
 
     def each
       single_index = (0..7).to_a

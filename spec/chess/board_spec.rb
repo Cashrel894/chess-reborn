@@ -42,18 +42,18 @@ RSpec.describe Chess::Board do
   end
 
   describe '#reset' do
-    let(:board) { described_class.empty.set('f5', :p) }
+    subject(:board) { described_class.default.reset(square) }
 
     context 'with square a Square' do
-      let(:square) { Square.from('f5') }
+      let(:square) { Square.from('f1') }
 
-      include_examples 'right board', 'f5', Chess::Piece.empty
+      include_examples 'right board', 'f1', Chess::Piece.empty
     end
 
     context 'with square a String' do
-      let(:square) { 'f5' }
+      let(:square) { 'c7' }
 
-      include_examples 'right board', 'f5', Chess::Piece.empty
+      include_examples 'right board', 'c7', Chess::Piece.empty
     end
   end
 
