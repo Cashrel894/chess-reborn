@@ -20,6 +20,16 @@ module Chess
 
       attr_reader :game, :detail
 
+      def ==(other)
+        ok? == other.ok? &&
+          game == other.game &&
+          detail == other.detail
+      end
+
+      def hash
+        [ok?, game, detail].hash
+      end
+
       private
 
       #

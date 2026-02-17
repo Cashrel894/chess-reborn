@@ -34,6 +34,17 @@ module Chess
       new(board, current_player, turn_id)
     end
 
+    def ==(other)
+      board == other.board &&
+        current_player == other.current_player &&
+        turn_id == other.turn_id &&
+        status == other.status
+    end
+
+    def hash
+      [board, current_player, turn_id, status].hash
+    end
+
     private
 
     def initialize(board, current_player, turn_id)

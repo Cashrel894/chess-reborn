@@ -56,6 +56,10 @@ module Chess
       to_a == other.to_a
     end
 
+    def hash
+      to_a.hash
+    end
+
     private
 
     #
