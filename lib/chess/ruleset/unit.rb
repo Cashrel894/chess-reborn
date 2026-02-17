@@ -10,9 +10,43 @@ module Chess
     class Unit
       include Logical
 
-      def self.new(&body); end
+      def initialize(&body)
+        raise ArgumentError unless block_given?
 
-      def eval(game, move); end
+        @body = body
+      end
+
+      def eval(game, move)
+        UnitDSL.new(game).eval(game, move, &@body)
+      end
+
+      class UnitNoReturnValueError < StandardError; end
+
+      #
+      # Manages Unit's eval DSL.
+      #
+      class UnitDSL
+        def initialize(original_game)
+          @original_game = original_game
+        end
+
+        def ok(game)
+          throw :ret, Result.ok(game)
+        end
+
+        def err(detail)
+          throw :ret, Result.err(@original_game, detail)
+        end
+
+        def eval(game, move, &body)
+          catch(:ret) do
+            instance_exec(game, move, &body)
+            raise UnitNoReturnValueError, 'Neither #ok nor #err is called.'
+          end
+        end
+      end
+
+      private_constant :UnitDSL
     end
   end
 end
