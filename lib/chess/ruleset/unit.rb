@@ -17,6 +17,7 @@ module Chess
       end
 
       def eval(game, move)
+        move = Move.from(move)
         UnitDSL.new(game).eval(game, move, &@body)
       end
 
